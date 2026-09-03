@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Search, X, SlidersHorizontal } from "lucide-react";
 import { events } from "../data/events";
-import { filterCategories } from "../data/constants"
+import { filterCategories } from "../data/constants";
 import { CURRENT_USER } from "../data/constants";
+import EventCard from "../components/cards/EventCard";
 
 function getGreeting() {
   const h = new Date().getHours();
@@ -106,6 +107,24 @@ export default function DiscoverEvents() {
             Sort: Nearest
           </button>
         </div>
+
+        {filtered.length > 0 ? (
+          <div className="event-grid">
+            {filtered.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        ) : (
+          <div className="discover-empty">
+            <div className="discover-empty__icon">
+              <Search size={24} color="#10B981" strokeWidth={2} />
+            </div>
+            <p className="discover-empty__title">No events found</p>
+            <p className="discover-empty__text">
+              Try a different search or category
+            </p>
+          </div>
+        )}
       </main>
     </div>
   );
