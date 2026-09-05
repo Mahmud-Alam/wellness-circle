@@ -271,6 +271,57 @@
   color: var(--primary);
 }
 
+/* ---------- Submit footer (sticky) ---------- */
+.create-submit-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.create-submit-footer__inner {
+  width: 100%;
+  max-width: 42rem;
+  pointer-events: auto;
+  background-color: white;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+  padding: 1rem 1.25rem 1.5rem;
+}
+.create-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+.create-submit-btn:disabled {
+  background-color: #E2E8F0;
+  color: #94A3B8;
+  cursor: not-allowed;
+}
+.create-submit-btn:not(:disabled) {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+.create-submit-btn:not(:disabled):hover {
+  background-color: var(--primary-dark);
+}
+.create-submit-note {
+  font-size: 0.6875rem;
+  color: #94A3B8;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
 /* ---------- Success state ---------- */
 .create-success {
   display: flex;
