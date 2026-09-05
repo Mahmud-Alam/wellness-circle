@@ -395,3 +395,584 @@
   color: #CBD5E1;
   margin-top: 0.25rem;
 }
+
+________________________
+.auth-page {
+  background: #ffffff;
+}
+
+.landing__hero-wrapper {
+  position: relative;
+}
+
+.landing__hero-eyebrow {
+  display: none;
+}
+
+.landing__cta-heading {
+  display: none;
+}
+
+.landing__primary-button,
+.landing__secondary-button {
+  width: 100%;
+}
+
+
+/* =========================================================
+   TABLET / DESKTOP
+   ========================================================= */
+
+@media (min-width: 768px) {
+
+  /* ---------- Page ---------- */
+
+  .auth-page {
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+
+  /* ---------- Hero ---------- */
+
+  .landing__hero-wrapper {
+    max-width: 1180px;
+    margin: 2.5rem auto 0;
+    padding: 0 2rem;
+    position: relative;
+  }
+
+  .landing__hero {
+    height: 600px;
+    min-height: 600px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+  }
+
+  .landing__hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+  }
+
+  .landing__hero-overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(7, 20, 16, 0.78) 0%,
+        rgba(7, 20, 16, 0.52) 35%,
+        rgba(7, 20, 16, 0.1) 70%,
+        rgba(7, 20, 16, 0.05) 100%
+      );
+  }
+
+
+  /* Hero badge */
+
+  .landing__hero-badge {
+    top: 2rem;
+    left: 2.5rem;
+    transform: none;
+
+    padding: 0.55rem 1rem;
+
+    font-size: 0.76rem;
+
+    background: rgba(255,255,255,0.93);
+    border: 1px solid rgba(255,255,255,0.65);
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+
+
+  /* Hero content */
+
+  .landing__hero-content {
+    left: 0;
+    right: auto;
+    bottom: 0;
+
+    width: 58%;
+    max-width: 650px;
+
+    padding: 3.5rem 3rem 4rem;
+
+    background: none;
+  }
+
+  .landing__hero-eyebrow {
+    display: block;
+
+    color: #6ee7b7;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    margin-bottom: 0.9rem;
+  }
+
+  .landing__hero-title {
+    font-size: clamp(2.75rem, 4vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+
+    max-width: 620px;
+
+    text-shadow: 0 3px 18px rgba(0,0,0,0.2);
+  }
+
+  .landing__hero-subtitle {
+    margin-top: 1.25rem;
+
+    max-width: 470px;
+
+    font-size: 1rem;
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.86);
+  }
+
+
+  /* ---------- CTA floating card ---------- */
+
+  .landing__cta-card {
+    position: absolute;
+
+    right: 4.5rem;
+    bottom: 3.5rem;
+
+    width: 390px;
+
+    margin: 0;
+
+    padding: 1.75rem;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.97);
+
+    backdrop-filter: blur(14px);
+
+    box-shadow:
+      0 24px 70px rgba(15, 23, 42, 0.18),
+      0 2px 8px rgba(15, 23, 42, 0.06);
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    gap: 0.9rem;
+  }
+
+  .landing__cta-heading {
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .landing__cta-heading h2 {
+    margin: 0;
+    color: var(--foreground);
+
+    font-size: 1.25rem;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+  }
+
+  .landing__cta-heading p {
+    margin: 0.4rem 0 0;
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+
+    color: var(--muted-foreground);
+  }
+
+  .landing__primary-button {
+    min-height: 50px;
+    padding: 0.85rem 1.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 0.9rem;
+  }
+
+  .landing__secondary-button {
+    min-height: 47px;
+    padding: 0.8rem 1.25rem;
+
+    font-size: 0.85rem;
+  }
+
+  .landing__trust-row {
+    padding-top: 0.25rem;
+
+    gap: 1rem;
+    justify-content: center;
+
+    flex-wrap: nowrap;
+  }
+
+  .landing__trust-item {
+    gap: 0.3rem;
+  }
+
+  .landing__trust-item svg {
+    color: #94a3b8;
+  }
+
+  .landing__trust-item span {
+    font-size: 0.65rem;
+  }
+
+
+  /* ---------- Social proof ---------- */
+
+  .landing__social {
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 3rem 2rem;
+
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 1.5rem;
+  }
+
+  .landing__social-text {
+    font-size: 0.9rem;
+  }
+
+  .landing__social::after {
+    content: "";
+    height: 30px;
+    width: 1px;
+    background: #e2e8f0;
+    order: 2;
+  }
+
+  .landing__stars {
+    order: 3;
+  }
+
+
+  /* ---------- Features ---------- */
+
+  .landing__features {
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 4rem 2rem 5rem;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 1.25rem;
+  }
+
+  .landing__features-header {
+    grid-column: 1 / -1;
+
+    margin-bottom: 1.75rem;
+
+    text-align: center;
+  }
+
+  .landing__features-title {
+    font-size: 2.35rem;
+
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+  }
+
+  .landing__feature-card {
+    margin: 0;
+
+    min-height: 235px;
+
+    padding: 1.75rem;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+    border-radius: 18px;
+
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .landing__feature-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #d1fae5;
+
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.1);
+  }
+
+  .landing__feature-icon-box {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    border-radius: 14px;
+
+    background: #ecfdf5;
+  }
+
+  .landing__feature-number {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .landing__feature-title {
+    font-size: 1.05rem;
+
+    margin-bottom: 0.6rem;
+  }
+
+  .landing__feature-desc {
+    font-size: 0.85rem;
+
+    line-height: 1.65;
+  }
+
+
+  /* ---------- Testimonials ---------- */
+
+  .landing__testimonials {
+    padding: 5rem max(2rem, calc((100vw - 1140px) / 2));
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 1.5rem;
+
+    background: #f8fafc;
+  }
+
+  .landing__testimonials-header {
+    grid-column: 1 / -1;
+
+    margin-bottom: 1.25rem;
+  }
+
+  .landing__testimonials-header h2 {
+    font-size: 2.2rem !important;
+
+    letter-spacing: -0.035em;
+  }
+
+  .landing__testimonial-card {
+    margin: 0;
+
+    padding: 2rem;
+
+    border-radius: 18px;
+
+    border: 1px solid #eef2f7;
+
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+  }
+
+  .landing__testimonial-quote {
+    min-height: 70px;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .landing__testimonial-author img {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .landing__testimonial-name {
+    font-size: 0.82rem;
+  }
+
+  .landing__testimonial-location {
+    margin-top: 0.15rem;
+
+    font-size: 0.7rem;
+  }
+
+
+  /* ---------- Final CTA ---------- */
+
+  .landing__final-cta {
+    max-width: 1140px;
+
+    margin: 5rem auto;
+
+    padding: 4.5rem 2rem;
+
+    border-radius: 28px;
+
+    background:
+      radial-gradient(
+        circle at 15% 10%,
+        rgba(255,255,255,0.15),
+        transparent 30%
+      ),
+      linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+      );
+
+    box-shadow: 0 20px 50px rgba(16,185,129,0.2);
+  }
+
+  .landing__final-cta h2 {
+    font-size: 2.5rem;
+
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+
+  .landing__final-cta p {
+    max-width: 560px;
+
+    margin: 1rem auto 2rem;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .landing__final-cta-btn {
+    padding: 1rem 2rem;
+
+    font-size: 0.9rem;
+  }
+
+  .landing__final-cta-note {
+    margin-top: 1rem !important;
+
+    font-size: 0.68rem !important;
+  }
+
+
+  /* ---------- Footer ---------- */
+
+  .landing__footer {
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 3rem 2rem;
+
+    display: grid;
+
+    grid-template-columns: auto 1fr;
+    align-items: center;
+
+    column-gap: 4rem;
+  }
+
+  .landing__footer-links {
+    justify-content: flex-end;
+
+    margin: 0;
+  }
+
+  .landing__footer-links button {
+    font-size: 0.8rem;
+  }
+
+  .landing__footer .divider {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    margin: 2rem 0 1.5rem !important;
+  }
+
+  .landing__footer-copy {
+    font-size: 0.72rem;
+  }
+
+  .landing__footer-made {
+    justify-self: end;
+
+    margin: 0;
+
+    font-size: 0.7rem;
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  .landing__hero {
+    height: 640px;
+    min-height: 640px;
+  }
+
+  .landing__hero-content {
+    padding: 4rem;
+  }
+
+  .landing__hero-badge {
+    left: 4rem;
+  }
+
+  .landing__cta-card {
+    width: 405px;
+
+    right: 4rem;
+    bottom: 4rem;
+
+    padding: 2rem;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP WHERE SPACE IS A LITTLE TIGHT
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1050px) {
+
+  .landing__hero {
+    height: 580px;
+  }
+
+  .landing__hero-content {
+    width: 52%;
+
+    padding-left: 2.5rem;
+  }
+
+  .landing__hero-title {
+    font-size: 2.5rem;
+  }
+
+  .landing__cta-card {
+    right: 3rem;
+
+    width: 350px;
+  }
+
+  .landing__features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

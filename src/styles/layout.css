@@ -1,6 +1,3 @@
-/* The main app (Discover / Create / Profile) uses this layout.
-   Mobile:  full-width, bottom nav fixed at bottom
-   Desktop: full-width, top nav at top, content centered */
 .app-Layout {
   min-height: 100vh;
   display: flex;
@@ -24,21 +21,62 @@
   }
 }
 
-/* ---------- Desktop Top Navbar ---------- */
-/* Hidden on mobile (display: none), visible from md (768px) up */
+/* ---------- Top Navbar ---------- */
+
 .nav-top {
-  display: none;
   position: sticky;
   top: 0;
   z-index: 30;
+
+  width: 100%;
+
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
+
   border-bottom: 1px solid var(--border);
+
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
 }
+
+/*
+ * LOGGED OUT
+ * ----------------
+ * Top navbar is visible on BOTH desktop and mobile.
+ */
+.nav-top--logged-out {
+  display: block;
+}
+
+/*
+ * LOGGED IN
+ * ----------------
+ * Desktop: top navbar visible.
+ * Mobile: hidden because bottom navbar is used.
+ */
+.nav-top--logged-in {
+  display: none;
+}
+
+/* ---------- Desktop ---------- */
+
 @media (min-width: 768px) {
-  .nav-top {
+  .nav-top--logged-out,
+  .nav-top--logged-in {
     display: block;
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 767px) {
+  /* Logged out → KEEP top navbar */
+  .nav-top--logged-out {
+    display: block;
+  }
+
+  /* Logged in → HIDE top navbar */
+  .nav-top--logged-in {
+    display: none;
   }
 }
 .nav-top__inner {
@@ -72,7 +110,7 @@
   color: var(--foreground);
 }
 .nav-top__link.active {
-  background-color: #ECFDF5;
+  background-color: #ecfdf5;
   color: var(--primary);
 }
 .nav-top__avatar {
@@ -83,7 +121,7 @@
   height: 2.5rem;
   border-radius: 50%;
   object-fit: cover;
-  outline: 2px solid #A7F3D0;
+  outline: 2px solid #a7f3d0;
   outline-offset: 2px;
 }
 .nav-top__avatar-dot {
@@ -150,7 +188,7 @@
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: #94A3B8;
+  color: #94a3b8;
   transition: color 0.2s ease;
 }
 .nav-bottom__tab.active .nav-bottom__tab-label {
@@ -174,35 +212,67 @@
   }
 }
 
-/* ---------- Auth Layout (phone frame) ---------- */
-/* Landing / Login / Signup pages render inside a centered phone frame */
-.auth-Layout {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #CBD5E1;
-}
-@media (min-width: 768px) {
-  .auth-Layout {
-    background-color: #CBD5E1;
-    padding: 1.5rem 0;
-  }
-}
-.auth-Layout__frame {
+/* =========================================================
+   AUTH LAYOUT
+   Full-width desktop + mobile responsive
+   ========================================================= */
+
+.auth-layout {
   width: 100%;
-  max-width: 430px;
   min-height: 100vh;
-  background-color: white;
+
+  background: #fff;
+}
+
+.auth-layout__frame {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #fff;
+
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
 @media (min-width: 768px) {
-  .auth-Layout__frame {
-    min-height: calc(100vh - 3rem);
-    border-radius: var(--radius-xl);
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.18);
+
+  .auth-layout {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
   }
+
+  .auth-layout__frame {
+    width: 100%;
+    min-height: 100vh;
+
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .auth-layout {
+    background: #fff;
+  }
+
+  .auth-layout__frame {
+    width: 100%;
+    min-height: 100vh;
+  }
+
 }
 
 /* ---------- Logo ---------- */
@@ -216,7 +286,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #10B981, #34D399);
+  background: linear-gradient(135deg, #10b981, #34d399);
   display: flex;
   align-items: center;
   justify-content: center;
