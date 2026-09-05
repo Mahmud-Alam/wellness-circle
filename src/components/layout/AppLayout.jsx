@@ -2,9 +2,9 @@ import TopNavbar from "./TopNavbar";
 import BottomNav from "./BottomNav";
 import { CURRENT_USER } from "../../data/constants";
 
-export default function AppShell({ children }) {
+export default function AppLayout({ children }) {
   return (
-    <div className="app-shell">
+    <div className="app-layout">
       {/* Desktop top nav — hidden on mobile */}
       <TopNavbar user={CURRENT_USER} />
 
