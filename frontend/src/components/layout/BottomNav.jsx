@@ -1,21 +1,46 @@
 import { Compass, PlusCircle, User } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-
-const TABS = [
-  { path: "/discover", label: "Discover", Icon: Compass },
-  { path: "/create", label: "Create", Icon: PlusCircle },
-  { path: "/profile", label: "Profile", Icon: User },
-];
+import { useAuth } from "../../context/AuthContext";
 
 export default function BottomNav() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isAdmin = user?.role === "admin";
+
+  const tabs = [
+    {
+      path: "/discover",
+      label: "Discover",
+      Icon: Compass,
+    },
+    ...(isAdmin
+      ? [
+          {
+            path: "/create",
+            label: "Create",
+            Icon: PlusCircle,
+          },
+        ]
+      : []),
+    ...(user
+      ? [
+          {
+            path: "/profile",
+            label: "Profile",
+            Icon: User,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <nav className="nav-bottom">
       <div className="nav-bottom__inner">
-        {TABS.map(({ path, label, Icon }) => {
+        {tabs.map(({ path, label, Icon }) => {
           const isActive = location.pathname === path;
+
           return (
             <button
               key={path}
@@ -31,7 +56,9 @@ export default function BottomNav() {
                   color={isActive ? "#10B981" : "#94A3B8"}
                 />
               </span>
+
               <span className="nav-bottom__tab-label">{label}</span>
+
               {isActive && <span className="nav-bottom__tab-dot" />}
             </button>
           );
