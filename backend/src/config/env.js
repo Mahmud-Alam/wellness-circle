@@ -11,7 +11,7 @@ if (missing.length > 0) {
   process.exit(1);
 }
 
-export const env = {
+const env = {
   port: parseInt(process.env.PORT || "5000", 10),
   nodeEnv: process.env.NODE_ENV || "development",
   clientUrl: process.env.CLIENT_URL || "http://localhost:5173",
@@ -21,3 +21,5 @@ export const env = {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
   },
 };
+
+export default env;
