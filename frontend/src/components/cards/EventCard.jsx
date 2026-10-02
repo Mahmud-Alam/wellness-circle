@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Calendar, Clock, MapPin, Users } from "lucide-react";
+import { Heart, Calendar, Clock, MapPin, Users, User } from "lucide-react";
 import CategoryBadge from "../ui/CategoryBadge";
+import "../../styles/EventCard.css";
 
 const FALLBACK_IMG =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'><rect width='400' height='225' fill='%23d1fae5'/><text x='50%25' y='50%25' font-family='sans-serif' font-size='20' fill='%23059669' text-anchor='middle' dy='.3em'>WellnessCircle</text></svg>";
@@ -94,13 +95,9 @@ export default function EventCard({ event }) {
 
         <div className="event-card__host-row">
           <div className="event-card__host">
-            {event.creator?.avatar_url ? (
-              <img src={event.creator.avatar_url} alt={hostName} />
-            ) : (
-              <div className="event-card__host-placeholder">
-                {hostName.charAt(0).toUpperCase()}
-              </div>
-            )}
+            <div className="event-card__host-avatar">
+              <User size={17} strokeWidth={2} />
+            </div>
 
             <span className="event-card__host-name">
               Hosted by <b>{hostName}</b>
