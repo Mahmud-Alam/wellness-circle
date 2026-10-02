@@ -14,7 +14,7 @@ function getGreeting() {
 }
 
 export default function DiscoverEvents() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
 
   const [events, setEvents] = useState([]);
   const [query, setQuery] = useState("");
@@ -74,8 +74,7 @@ export default function DiscoverEvents() {
 
   // Get the logged-in user's name
   const userName =
-    user?.user_metadata?.first_name ||
-    user?.user_metadata?.full_name ||
+    profile?.full_name.split(" ")[0] ||
     user?.email?.split("@")[0] ||
     "there";
 
