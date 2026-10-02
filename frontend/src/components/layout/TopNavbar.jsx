@@ -1,4 +1,4 @@
-import { Compass, PlusCircle, User, LogOut } from "lucide-react";
+import { Compass, PlusCircle, User } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import { useAuth } from "../../context/AuthContext";
@@ -10,18 +10,13 @@ const NAV_ITEMS = [
 ];
 
 export default function TopNavbar() {
-  const { user, profile, signOut } = useAuth();
+  const { user, profile } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const isAdmin = user?.role === "admin";
 
   const navItems = NAV_ITEMS.filter((item) => !item.adminOnly || isAdmin);
-
-  const handleLogout = async () => {
-    await signOut();
-    navigate("/");
-  };
 
   return (
     <header
@@ -70,11 +65,6 @@ export default function TopNavbar() {
                   </button>
                 );
               })}
-
-              <button className="nav-top__link" onClick={handleLogout}>
-                <LogOut size={18} strokeWidth={2.25} />
-                Logout
-              </button>
             </nav>
 
             <div

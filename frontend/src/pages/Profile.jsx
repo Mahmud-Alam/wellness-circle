@@ -9,6 +9,7 @@ import {
   CalendarClock,
   Check,
   X,
+  LogOut,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,7 @@ const STAT_ICONS = {
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { user, refreshProfile } = useAuth();
+  const { user, refreshProfile, signOut } = useAuth();
 
   const [profile, setProfile] = useState(null);
 
@@ -108,7 +109,7 @@ export default function Profile() {
 
       setProfile(data.profile);
       await refreshProfile();
-      
+
       setEditForm({
         full_name: data.profile.full_name || "",
         profile_pic_url: data.profile.profile_pic_url || "",
@@ -135,6 +136,16 @@ export default function Profile() {
 
     setError("");
     setEditing(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (err) {
+      console.error("Logout failed:", err);
+      setError(err.message || "Failed to logout.");
+    }
   };
 
   if (loading) {
@@ -507,7 +518,7 @@ export default function Profile() {
           })}
         </div>
 
-        {/* Streak banner */}
+        {/* Streak banner 
         <div className="profile-streak">
           <div className="profile-streak__icon">
             <Flame size={18} color="#F97316" strokeWidth={2} />
@@ -523,7 +534,8 @@ export default function Profile() {
 
           <div className="profile-streak__badge">View</div>
         </div>
-
+        */}
+        
         {/* Tabs */}
         <div className="profile-tabs">
           <div className="profile-tabs__inner">
@@ -591,6 +603,40 @@ export default function Profile() {
               )}
             </div>
           )}
+        </div>
+
+        {/* Logout */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "32px",
+            paddingBottom: "32px",
+          }}
+        >
+          <button
+            type="button"
+            onClick={handleLogout}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              width: "100%",
+              maxWidth: "420px",
+              padding: "11px 16px",
+              border: "1px solid #FECACA",
+              borderRadius: "10px",
+              background: "#FEF2F2",
+              color: "#DC2626",
+              fontSize: "14px",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            <LogOut size={17} strokeWidth={2.2} />
+            Logout
+          </button>
         </div>
       </div>
     </div>
