@@ -24,7 +24,7 @@ const STAT_ICONS = {
 
 export default function Profile() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, refreshProfile } = useAuth();
 
   const [profile, setProfile] = useState(null);
 
@@ -107,7 +107,8 @@ export default function Profile() {
       });
 
       setProfile(data.profile);
-
+      await refreshProfile();
+      
       setEditForm({
         full_name: data.profile.full_name || "",
         profile_pic_url: data.profile.profile_pic_url || "",
