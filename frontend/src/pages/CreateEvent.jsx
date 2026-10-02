@@ -148,7 +148,7 @@ export default function CreateEvent() {
                     <Upload size={22} color="#10B981" strokeWidth={2} />
                   </div>
 
-                  <p className="create-upload__text">Upload Cover Image</p>
+                  <p className="create-upload__text">Paste Your Cover Image URL</p>
 
                   <p className="create-upload__sub">
                     JPG, PNG or WebP · Max 5 MB
@@ -161,7 +161,7 @@ export default function CreateEvent() {
               type="url"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
-              placeholder="Or paste an image URL..."
+              placeholder="Paste a cover image URL..."
               className="input"
               style={{ fontSize: "0.8125rem" }}
             />
