@@ -10,7 +10,7 @@ const NAV_ITEMS = [
 ];
 
 export default function TopNavbar() {
-  const { user, signOut } = useAuth();
+  const { user, profile, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -81,7 +81,19 @@ export default function TopNavbar() {
               className="nav-top__avatar"
               onClick={() => navigate("/profile")}
             >
-              <img src={user.avatar} alt={user.name || "Profile"} />
+              <img
+                src={
+                  profile?.profile_pic_url ||
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    profile?.full_name || user?.email?.split("@")[0] || "User",
+                  )}&background=d1fae5&color=047857`
+                }
+                alt={profile?.full_name || "Profile"}
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://ui-avatars.com/api/?name=User&background=d1fae5&color=047857";
+                }}
+              />
               <span className="nav-top__avatar-dot" />
             </div>
           </>
