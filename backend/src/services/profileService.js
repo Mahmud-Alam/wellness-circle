@@ -47,27 +47,53 @@ export const updateProfile = async (userId, updates) => {
   return rows[0];
 };
 
-export const getMyEvents = async (userId, role) => {
-  if (role === "admin") {
-    // Admin: events they created
-    const { rows } = await query(
-      `SELECT e.*, (SELECT COUNT(*)::int FROM event_attendees WHERE event_id = e.id) AS attendee_count
-       FROM events e
-       WHERE e.creator_id = $1 AND e.event_date >= NOW()
-       ORDER BY e.event_date ASC`,
-      [userId],
-    );
-    return rows;
-  } else {
-    // User: events they're attending
-    const { rows } = await query(
-      `SELECT e.*, ea.created_at AS joined_at
-       FROM event_attendees ea
-       JOIN events e ON e.id = ea.event_id
-       WHERE ea.user_id = $1 AND e.event_date >= NOW()
-       ORDER BY e.event_date ASC`,
-      [userId],
-    );
-    return rows;
-  }
+/**
+ * Events this user has JOINED via event_attendees.
+ * Excludes events they created (those go in getHostingEvents).
+ */
+export const getAttendingEvents = async (userId) => {
+  const { rows } = await query(
+    `SELECT e.id, e.title, e.description, e.event_date, e.location_text,
+            e.category, e.cover_image_url, e.creator_id, e.created_at,
+            json_build_object(
+              'username', p.username,
+              'full_name', p.full_name,
+              'profile_pic_url', p.profile_pic_url
+            ) AS creator,
+            (SELECT COUNT(*)::int FROM event_attendees WHERE event_id = e.id) AS attendee_count,
+            true AS is_attending
+     FROM event_attendees ea
+     JOIN events e ON e.id = ea.event_id
+     JOIN users u ON u.id = e.creator_id
+     LEFT JOIN profiles p ON p.user_id = u.id
+     WHERE ea.user_id = $1
+       AND e.creator_id != $1
+       AND e.event_date >= NOW()
+     ORDER BY e.event_date ASC`,
+    [userId],
+  );
+  return rows;
+};
+
+/**
+ * Events this user has CREATED (hosting).
+ */
+export const getHostingEvents = async (userId) => {
+  const { rows } = await query(
+    `SELECT e.id, e.title, e.description, e.event_date, e.location_text,
+            e.category, e.cover_image_url, e.creator_id, e.created_at,
+            json_build_object(
+              'username', p.username,
+              'full_name', p.full_name,
+              'profile_pic_url', p.profile_pic_url
+            ) AS creator,
+            (SELECT COUNT(*)::int FROM event_attendees WHERE event_id = e.id) AS attendee_count
+     FROM events e
+     LEFT JOIN profiles p ON p.user_id = e.creator_id
+     WHERE e.creator_id = $1
+       AND e.event_date >= NOW()
+     ORDER BY e.event_date ASC`,
+    [userId],
+  );
+  return rows;
 };

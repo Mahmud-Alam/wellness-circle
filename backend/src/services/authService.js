@@ -4,7 +4,7 @@ import { hashPassword, comparePassword, signToken } from "../utils.js";
 export const signUp = async ({
   email,
   password,
-  role,
+  role = "user",
   full_name,
   username,
   profile_pic_url,
