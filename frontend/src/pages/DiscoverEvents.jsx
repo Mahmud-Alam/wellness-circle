@@ -74,9 +74,7 @@ export default function DiscoverEvents() {
 
   // Get the logged-in user's name
   const userName =
-    profile?.full_name.split(" ")[0] ||
-    user?.email?.split("@")[0] ||
-    "there";
+    profile?.full_name.split(" ")[0] || user?.email?.split("@")[0] || "there";
 
   return (
     <div className="discover-page">
@@ -99,13 +97,19 @@ export default function DiscoverEvents() {
 
             {/* Mobile avatar */}
             <div className="discover-avatar-wrap block md:hidden">
-              {user?.user_metadata?.avatar_url ? (
-                <img src={user.user_metadata.avatar_url} alt={userName} />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-emerald-100 text-emerald-700 font-semibold">
-                  {userName.charAt(0).toUpperCase()}
-                </div>
-              )}
+              <img
+                src={
+                  profile?.profile_pic_url ||
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    profile?.full_name || "User",
+                  )}&background=d1fae5&color=047857`
+                }
+                alt={profile?.full_name || "Profile"}
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://ui-avatars.com/api/?name=User&background=d1fae5&color=047857";
+                }}
+              />
 
               <span className="discover-avatar-dot" />
             </div>
