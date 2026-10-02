@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
 import AppLayout from "./components/layout/AppLayout";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
@@ -13,65 +13,88 @@ import CreateEvent from "./pages/CreateEvent";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
+function AppRoutes() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return null;
+  }
+
+  return (
+    <Routes>
+      {/* Public pages */}
+      <Route
+        path="/"
+        element={user ? <Navigate to="/discover" replace /> : <Landing />}
+      />
+
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/discover" replace /> : <LogIn />}
+      />
+
+      <Route
+        path="/signup"
+        element={user ? <Navigate to="/discover" replace /> : <SignUp />}
+      />
+
+      {/* Discover */}
+      <Route
+        path="/discover"
+        element={
+          <AppLayout>
+            <DiscoverEvents />
+          </AppLayout>
+        }
+      />
+
+      {/* Event details */}
+      <Route
+        path="/event/:id"
+        element={
+          <AppLayout>
+            <EventDetails />
+          </AppLayout>
+        }
+      />
+
+      {/* Create event - Admin only */}
+      <Route
+        path="/create"
+        element={
+          <ProtectedRoute adminOnly>
+            <AppLayout>
+              <CreateEvent />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Profile - Logged-in users */}
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <Profile />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      {/* 404 */}
+      <Route path="/404" element={<NotFound />} />
+
+      {/* Unknown route */}
+      <Route path="*" element={<Navigate to="/404" replace />} />
+    </Routes>
+  );
+}
+
 export default function App() {
   return (
     <AuthProvider>
-      <Routes>
-        {/* Public / Auth routes */}
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignUp />} />
-
-        {/* Discover */}
-        <Route
-          path="/discover"
-          element={
-            <AppLayout>
-              <DiscoverEvents />
-            </AppLayout>
-          }
-        />
-
-        {/* Event details */}
-        <Route
-          path="/event/:id"
-          element={
-            <AppLayout>
-              <EventDetails />
-            </AppLayout>
-          }
-        />
-
-        {/* Create event - Admin only */}
-        <Route
-          path="/create"
-          element={
-            <ProtectedRoute adminOnly>
-              <AppLayout>
-                <CreateEvent />
-              </AppLayout>
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Profile - Logged-in users */}
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <AppLayout>
-                <Profile />
-              </AppLayout>
-            </ProtectedRoute>
-          }
-        />
-
-        {/* 404 */}
-        <Route path="/404" element={<NotFound />} />
-
-        {/* Unknown route */}
-        <Route path="*" element={<Navigate to="/404" replace />} />
-      </Routes>
+      <AppRoutes />
     </AuthProvider>
   );
 }

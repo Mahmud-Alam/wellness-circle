@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   ArrowLeft,
   Mail,
@@ -18,7 +18,7 @@ import Logo from "../components/layout/Logo";
 import { useAuth } from "../context/AuthContext";
 
 export default function SignUp() {
-  const { user, loading, signUp } = useAuth();
+  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -36,12 +36,6 @@ export default function SignUp() {
   const [usernameError, setUsernameError] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    if (!loading && user) {
-      navigate("/discover", { replace: true });
-    }
-  }, [user, loading, navigate]);
 
   const passwordStrength = (() => {
     if (form.password.length === 0) return 0;

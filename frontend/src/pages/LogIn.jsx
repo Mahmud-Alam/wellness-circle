@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   ArrowLeft,
   Mail,
@@ -19,7 +19,7 @@ export default function LogIn() {
   const location = useLocation();
 
   // Real authentication from AuthContext
-  const { user, loading: authLoading, signIn } = useAuth();
+  const { signIn } = useAuth();
 
   // If user was redirected to login from a protected page,
   // send them back there after successful login.
@@ -34,13 +34,6 @@ export default function LogIn() {
   const [error, setError] = useState("");
 
   const canSubmit = email.trim().length > 0 && password.length > 0;
-
-  // If the user is already logged in, don't keep them on Login page.
-  useEffect(() => {
-    if (!authLoading && user) {
-      navigate(from, { replace: true });
-    }
-  }, [user, authLoading, from, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
