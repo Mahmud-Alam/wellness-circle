@@ -72,7 +72,9 @@ export const createEvent = async (creatorId, payload) => {
       payload.event_date,
       payload.location_text,
       payload.category,
-      payload.cover_image_url || null,
+      payload.cover_image_url ||
+        "https://img.magnific.com/free-vector/background-gradient-design-wave-green-modern-abstract_343694-3962.jpg?semt=ais_hybrid&w=740&q=80",
+      ,
     ],
   );
   return rows[0];
