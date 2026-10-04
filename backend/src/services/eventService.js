@@ -62,9 +62,17 @@ export const getEventById = async (id, userId = null) => {
 
 export const createEvent = async (creatorId, payload) => {
   const { rows } = await query(
-    `INSERT INTO events (creator_id, title, description, event_date, location_text, category, cover_image_url)
-     VALUES ($1, $2, $3, $4, $5, $6, $7)
-     RETURNING *`,
+    `INSERT INTO events (
+      creator_id,
+      title,
+      description,
+      event_date,
+      location_text,
+      category,
+      cover_image_url
+    )
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING *`,
     [
       creatorId,
       payload.title,
@@ -74,9 +82,9 @@ export const createEvent = async (creatorId, payload) => {
       payload.category,
       payload.cover_image_url ||
         "https://img.magnific.com/free-vector/background-gradient-design-wave-green-modern-abstract_343694-3962.jpg?semt=ais_hybrid&w=740&q=80",
-      ,
     ],
   );
+
   return rows[0];
 };
 
